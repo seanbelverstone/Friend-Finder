@@ -1,11 +1,21 @@
-var express = require("express");
 var path = require("path");
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+// Shows the friends JSON object
+module.exports = function(app){
+    app.get("/api/friends", function(req, res) {
+        res.sendFile(path.join(__dirname, "../data/friends.js"));
+    });
 
+    // app.post("/api/friends", function(req, res) {
 
-// Displays all characters
-app.get("/api/friends", function(req, res) {
-    res.sendFile(path.join(__dirname, "../data.friends.js"));
-});
+    //     var matchingFriend = req.body;
+      
+    //     matchingFriend.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
+      
+    //     console.log(newCharacter);
+      
+    //     characters.push(newCharacter);
+      
+    //     res.json(newCharacter);
+    //   });
+}
