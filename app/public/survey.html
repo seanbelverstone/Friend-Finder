@@ -4,9 +4,9 @@
 
     <title>Fellowship - Survey</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../../app/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../app/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 
 </head>
 <body>
@@ -177,7 +177,7 @@
                     </select>
                 </div>
     
-                <button class="btn btn-primary" type="submit">Submit!</button>
+                <button class="btn btn-primary" type="submit" id="submit">Submit!</button>
                                                 
         </form>
 
@@ -198,10 +198,88 @@
 
     </div>
 
+    <!-- Modal Popup -->
+  <!-- Modal -->
+  <div id="results-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"></button>
+          <h2 class="modal-title"><strong>Best Match</strong></h2>
+        </div>
+        <div class="modal-body">
+          <h2 id="match-name"></h2>
+          <img id="match-img" src="" alt="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        
+    $("#submit").on("click", function(event) {
+    // Stops the page from refreshing
+    event.preventDefault();
+
+    function validateForm() {
+        var isValid = true;
+        $(".form-control").each(() => {
+            if ($(this).val() === "") {
+            isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    if (validateForm()) {
+
+        var userInput = {
+            name: $("#yourName").val(),
+            photo: $("#imageLink").val(),
+            scores: [
+                $("#question1").val(),
+                $("#question2").val(),
+                $("#question3").val(),
+                $("#question4").val(),
+                $("#question5").val(),
+                $("#question6").val(),
+                $("#question7").val(),
+                $("#question8").val(),
+                $("#question9").val(),
+                $("#question10").val()
+                ]
+        };
+
+        console.log(userInput);
+    // AJAX post the data to the friends API.
+    $.post("/api/friends", userInput, data => {
+
+        // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+        $("#match-name").text(data.name);
+        $("#match-img").attr("src", data.photo);
+
+        // Show the modal with the best match
+        $("#results-modal").modal("toggle");
+
+    });
+    } else {
+    alert("Please fill out all fields before continuing.");
+    }
+});
+
+    
+    </script>
 </body>
 </html>
