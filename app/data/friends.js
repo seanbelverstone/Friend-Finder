@@ -207,3 +207,6 @@ var friends = [{
         2
     ]
 }]
+
+
+module.exports = friends;

@@ -1,4 +1,3 @@
-var path = require("path");
 var friends = require("../data/friends");
 
 // Shows the friends JSON object
@@ -12,15 +11,13 @@ module.exports = function(app) {
     app.post("/api/friends", function(req, res) {
         console.log(req.body.scores);
     
-        // Receive user details (name, photo, scores)
         var userInput = req.body;
     
-        // parseInt for scores
+        // Parse ints the scores to be numbers
         for(var i = 0; i < userInput.scores.length; i++) {
           userInput.scores[i] = parseInt(userInput.scores[i]);
         }
     
-        // default friend match is the first friend but result will be whoever has the minimum difference in scores
         var bestFriendIndex = 0;
         var minimumDifference = 40;
     
@@ -38,7 +35,7 @@ module.exports = function(app) {
           }
         }
     
-        // friends.push(userInput);
+        friends.push(userInput);
     
         res.json(friends[bestFriendIndex]);
       });
