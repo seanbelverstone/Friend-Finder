@@ -258,6 +258,7 @@
     var currentURL = window.location.origin;
 
     $.post(currentURL + "/api/friends", userInput, function(data) {
+        console.log(data);
 				$("#bestFriend").text(data.name);
 				$("#bestFriendPhoto").attr("src", data.photo);
 				$("#exampleModal").modal("toggle");
