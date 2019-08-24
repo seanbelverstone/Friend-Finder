@@ -235,7 +235,6 @@
     // Stops the page from refreshing
     event.preventDefault();
 
-        $("#exampleModal").attr("class", "modal fade show").css("display: block");
 
         var userInput = {
             name: $("#yourName").val(),
@@ -261,7 +260,8 @@
         console.log(data);
 				$("#bestFriend").text(data.name);
 				$("#bestFriendPhoto").attr("src", data.photo);
-				$("#exampleModal").modal("toggle");
+                $("#exampleModal").modal("toggle");
+                $("#exampleModal").attr("class", "modal fade show").css("display: block");
 			});
 
 });
