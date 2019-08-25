@@ -176,95 +176,80 @@
                     <option value="5">5 (Strongly Agree)</option>
                 </select>
             </div>
-    
-                <button class="btn btn-primary" type="submit" id="submit" data-toggle="modal" data-target="#exampleModal">Submit!</button>
-                                                
         </form>
-
-        <div class="row">
-            <div class="col-12">
-
-                <a href ="/api/friends">
-                    <p>API Friends List</p>
-                </a>
-
-                <span>|</span>
-
-                <a href="https://github.com/seanbelverstone/Friend-Finder">
-                    <p>GitHub Repo</p>
-                </a>
-            </div>
-        </div>
-
     </div>
 
-<!-- Button trigger modal -->
-      
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Your best friend</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <h2 id="bestFriend"></h2>
-                <img id="bestFriendPhoto" src="#">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
+    <div class="text-center">
+            <button id="submitBtn" type="submit" class="btn btn-success btn-lg">Submit</button>
         </div>
-      </div>
+        
+        <!-- Modal after survey completion -->
+        <div id="bestFriendModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Your New Best Friend</h1>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="bestFriend"></h2>
+                        <img id="bestFriendPhoto" src="#">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <footer>
+        <div class="container">
+            <a href="/api/friends">Friends API</a>
+            <span>|</span>
+            <a href="https://github.com/seanbelverstone/Friend-Finder">GitHub Repo</a>
+        </div>
+    </footer>
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </body>
 </html>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-    $("#submit").on("click", function(event) {
-    // Stops the page from refreshing
-    event.preventDefault();
+    $("#submitBtn").on("click", function(event) {
+        event.preventDefault();
 
-
-        var userInput = {
-            name: $("#yourName").val(),
-            photo: $("#imageLink").val(),
-            scores: [
-                $("#question1").val(),
-                $("#question2").val(),
-                $("#question3").val(),
-                $("#question4").val(),
-                $("#question5").val(),
-                $("#question6").val(),
-                $("#question7").val(),
-                $("#question8").val(),
-                $("#question9").val(),
-                $("#question10").val()
+            var newUser = {
+                name: $("#yourName").val().trim(),
+                photo: $("#imageLink").val().trim(),
+                scores: [
+                    $("#question1").val(),
+                    $("#question2").val(),
+                    $("#question3").val(),
+                    $("#question4").val(),
+                    $("#question5").val(),
+                    $("#question6").val(),
+                    $("#question7").val(),
+                    $("#question8").val(),
+                    $("#question9").val(),
+                    $("#question10").val()
                 ]
-        };
+            };
+            $('#bestFriendModal').on('shown.bs.modal', function () {
+            $('#bestFriendModal').trigger('focus')
+            });
 
-        console.log(userInput);
-    var currentURL = window.location.origin;
-
-    $.post(currentURL + "/api/friends", userInput, function(data) {
-        console.log(data);
-				$("#bestFriend").text(data.name);
-				$("#bestFriendPhoto").attr("src", data.photo);
-                $("#exampleModal").modal("toggle");
-                $("#exampleModal").attr("class", "modal fade show").css("display: block");
-			});
-
-});
-
-    
-    </script>
+            var currentURL = window.location.origin;
+            // Ajax call for receiving response after POST req
+            $.post("/api/friends", newUser, function(data) {
+                $("#bestFriend").text(data.name);
+                $("#bestFriendPhoto").attr("src", data.photo);
+                $("#bestFriendModal").modal("toggle");
+            });
+    });
+</script>
