@@ -9,15 +9,14 @@ module.exports = function(app) {
   app.post("/api/friends", function(req, res) {
     console.log(req.body.scores);
 
-    // Receive user details (name, photo, scores)
+    // Stores the user's details (name, photo and scores) into the variable 'user'
     var user = req.body;
 
-    // parseInt for scores
+    // ParseInt the scores
     for(var i = 0; i < user.scores.length; i++) {
       user.scores[i] = parseInt(user.scores[i]);
     }
 
-    // default friend match is the first friend but result will be whoever has the minimum difference in scores
     var bestFriendIndex = 0;
     var minimumDifference = 40;
 
