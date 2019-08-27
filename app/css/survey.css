@@ -36,3 +36,12 @@ a:hover {
 #bestFriendModal {
     display: none;
 }
+
+.modal-content {
+    display: inline-block;
+}
+
+#fellowshipPhoto {
+    width: 100%;
+    height: auto;
+}
