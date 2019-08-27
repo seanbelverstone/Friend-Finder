@@ -230,10 +230,49 @@
 <script type="text/javascript">
 
     $("#submitButton").on("click", function() {
-        $('#modal').modal("toggle");
-        $('#exampleModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        });
+        event.preventDefault();
+        
+        // Form validation
+		var valid = true;
+		if ($("#name").val() === "" || $("#photo").val() === "") {
+			valid = false;
+        } else if ($("#question1").val() === "Select an Option" || 
+                $("#question2").val() === "Select an Option" || 
+                $("#question3").val() === "Select an Option" || 
+                $("#question4").val() === "Select an Option" || 
+                $("#question5").val() === "Select an Option" || 
+                $("#question6").val() === "Select an Option" || 
+                $("#question7").val() === "Select an Option" || 
+                $("#question8").val() === "Select an Option" || 
+                $("#question9").val() === "Select an Option" || 
+                $("#question10").val() === "Select an Option") {
+            valid = false;
+		}
+        
+        if (valid) {
+            var newUser = {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                    scores: [
+                    $("#question2").val() === "Select an Option",
+                    $("#question3").val() === "Select an Option",
+                    $("#question4").val() === "Select an Option",
+                    $("#question5").val() === "Select an Option",
+                    $("#question6").val() === "Select an Option",
+                    $("#question7").val() === "Select an Option",
+                    $("#question8").val() === "Select an Option",
+                    $("#question9").val() === "Select an Option",
+                    $("#question10").val() === "Select an Option"            
+                        ]
+            }
+
+            
+        }
+        
+        
+        
+        
+
     });
 
 
