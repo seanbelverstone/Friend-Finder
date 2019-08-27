@@ -1,5 +1,12 @@
 /* Survey Page */
 
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .container {
     background-color: gainsboro;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 30px;
 }

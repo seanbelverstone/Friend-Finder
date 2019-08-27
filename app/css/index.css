@@ -3,10 +3,13 @@ body {
     background-repeat: repeat-y;
     background-attachment: scroll;
     background-size: 100%;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Survey Page */
-
 .container {
-    background-color: gainsboro;
+    margin-top: 30px;
+}
+
+.jumbotron {
+    border-radius: 50px;
 }
