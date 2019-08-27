@@ -20,26 +20,30 @@ module.exports = function(app) {
     var bestFriendIndex = 0;
     var minimumDifference = 40;
 
-    // in this for-loop, start off with a zero difference and compare the user and the ith friend scores, one set at a time
-    //  whatever the difference is, add to the total difference
+
+    //Doing the ol' double for-loop. First we loop through the friends array. Then, we loop through my scores
+    //and take my scores away from the friends scores and saves it in totalDifference. I'm using Math.abs so
+    //I never get a negative number
     for(var i = 0; i < friends.length; i++) {
+
       var totalDifference = 0;
+
       for(var j = 0; j < friends[i].scores.length; j++) {
         var difference = Math.abs(user.scores[j] - friends[i].scores[j]);
         totalDifference += difference;
       }
 
-      // if there is a new minimum, change the best friend index and set the new minimum for next iteration comparisons
+      //If the total difference is less than minimum, it sets the index to i so we can loop through again.
       if(totalDifference < minimumDifference) {
         bestFriendIndex = i;
         minimumDifference = totalDifference;
       }
     }
 
-    // after finding match, add user to friend array
+    //After a match has been found, push the user to the friends object.
     friends.push(user);
 
-    // send back to browser the best friend match
+    //Sends the data back to the browser so we can do it again
     res.json(friends[bestFriendIndex]);
   });
 };
