@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    background-image: url("./images/background.jpg")
 }
 
 .container {
@@ -11,18 +12,23 @@ body {
     border-radius: 30px;
 }
 
+#submitBtn {
+    margin-top: 30px;
+}
+
 #api {
     float: left;
 }
 
 #github {
     float: right;
+
 }
 
-a:link {
-    color: black !important;
+a {
+    color: black;
 }
 
 a:hover {
-    color: red;
+    color: gray;
 }
