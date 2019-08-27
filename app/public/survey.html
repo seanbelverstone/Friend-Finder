@@ -189,7 +189,7 @@
 </div>
       
       <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="fellowshipModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -199,7 +199,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <h2 id="fellowshipName"></h2>
+                <img id="fellowshipPhoto" src="#">            
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -218,10 +219,9 @@
     </footer>
 
     <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
@@ -254,6 +254,7 @@
                 name: $("#name").val().trim(),
                 photo: $("#photo").val().trim(),
                     scores: [
+                    $("#question1").val(),
                     $("#question2").val(),
                     $("#question3").val(),
                     $("#question4").val(),
@@ -266,16 +267,19 @@
                         ]
             };
 
-            console.log(newUser);
-            // $.post(currentURL + "/api/friends", newUser, function(results) {
+            var currentURL = window.location.origin;
 
-            // }
+            $.post(currentURL + "/api/friends", newUser, function(results) {
 
-        }
-        
-        
-        
-        
+                $("#fellowshipName").text(results.name);
+				$("#fellowshipPhoto").attr("src", results.photo);
+				$("#fellowshipModal").modal("toggle");
+            });
+
+        } else {
+
+			alert("Survey is incomplete!");
+		}
 
     });
 
