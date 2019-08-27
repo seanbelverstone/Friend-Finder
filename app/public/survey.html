@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="bootstrap/js/bootstrap-modal.js" rel="stylesheet" media="screen">
     <link href="css/survey.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -29,12 +30,12 @@
             <div class="col-6">
                 <form>
                     <div class="form-group">
-                        <label for="yourName">Your Name (Required)</label>
-                        <input type="text" class="form-control" id="yourName">
+                        <label for="name">Your Name (Required)</label>
+                        <input type="text" class="form-control" id="name">
                     </div>
                     <div class="form-group">
-                        <label for="imageLink">Link to Photo Image (Required)</label>
-                        <input type="url" class="form-control" id="imageLink">
+                        <label for="photo">Link to Photo Image (Required)</label>
+                        <input type="url" class="form-control" id="photo">
                     </div>
                 <hr class="my-4">
             </div>
@@ -181,28 +182,32 @@
     </div>
 
     <div class="text-center">
-            <button id="submitBtn" type="submit" class="btn btn-success btn-lg">Submit</button>
-        </div>
-        
-        <!-- Modal after survey completion -->
-        <div id="bestFriendModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Your New Best Friend</h1>
-                    </div>
-                    <div class="modal-body">
-                        <h2 id="bestFriend"></h2>
-                        <img id="bestFriendPhoto" src="#">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+        <button id="submitButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Submit</button>
+    </div>
+
+<!-- Closing Container Div -->
+</div>
+      
+      <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
             </div>
         </div>
-    </div>
+        </div>
 
     <footer>
         <div class="container">
@@ -216,41 +221,21 @@
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
 
 <script type="text/javascript">
 
-    $("#submitBtn").on("click", function(event) {
-        event.preventDefault();
-
-            var newUser = {
-                name: $("#yourName").val().trim(),
-                photo: $("#imageLink").val().trim(),
-                scores: [
-                    $("#question1").val(),
-                    $("#question2").val(),
-                    $("#question3").val(),
-                    $("#question4").val(),
-                    $("#question5").val(),
-                    $("#question6").val(),
-                    $("#question7").val(),
-                    $("#question8").val(),
-                    $("#question9").val(),
-                    $("#question10").val()
-                ]
-            };
-            $('#bestFriendModal').on('shown.bs.modal', function () {
-            $('#bestFriendModal').trigger('focus')
-            });
-
-            var currentURL = window.location.origin;
-            // Ajax call for receiving response after POST req
-            $.post("/api/friends", newUser, function(data) {
-                $("#bestFriend").text(data.name);
-                $("#bestFriendPhoto").attr("src", data.photo);
-                $("#bestFriendModal").modal("toggle");
-            });
+    $("#submitButton").on("click", function() {
+        $('#modal').modal("toggle");
+        $('#exampleModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
     });
+
+
+
 </script>
