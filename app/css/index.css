@@ -1,0 +1,35 @@
+body {
+    background-image: url("./images/shire.jpg");
+    background-repeat: repeat-y;
+    background-attachment: scroll;
+    background-size: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.jumbotron {
+    border-radius: 50px;
+}
+
+.lead {
+    font-size: 25px;
+}
+
+#api {
+    float: left;
+}
+
+#github {
+    float: right;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: darkgray;
+}
