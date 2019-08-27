@@ -254,19 +254,23 @@
                 name: $("#name").val().trim(),
                 photo: $("#photo").val().trim(),
                     scores: [
-                    $("#question2").val() === "Select an Option",
-                    $("#question3").val() === "Select an Option",
-                    $("#question4").val() === "Select an Option",
-                    $("#question5").val() === "Select an Option",
-                    $("#question6").val() === "Select an Option",
-                    $("#question7").val() === "Select an Option",
-                    $("#question8").val() === "Select an Option",
-                    $("#question9").val() === "Select an Option",
-                    $("#question10").val() === "Select an Option"            
+                    $("#question2").val(),
+                    $("#question3").val(),
+                    $("#question4").val(),
+                    $("#question5").val(),
+                    $("#question6").val(),
+                    $("#question7").val(),
+                    $("#question8").val(),
+                    $("#question9").val(),
+                    $("#question10").val()            
                         ]
-            }
+            };
 
-            
+            console.log(newUser);
+            // $.post(currentURL + "/api/friends", newUser, function(results) {
+
+            // }
+
         }
         
         
