@@ -10,3 +10,19 @@ body {
     padding: 30px;
     border-radius: 30px;
 }
+
+#api {
+    float: left;
+}
+
+#github {
+    float: right;
+}
+
+a:link {
+    color: black !important;
+}
+
+a:hover {
+    color: red;
+}

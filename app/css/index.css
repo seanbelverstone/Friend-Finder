@@ -13,3 +13,23 @@ body {
 .jumbotron {
     border-radius: 50px;
 }
+
+.lead {
+    font-size: 25px;
+}
+
+#api {
+    float: left;
+}
+
+#github {
+    float: right;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: darkgray;
+}
