@@ -189,11 +189,11 @@
 </div>
       
       <!-- Modal -->
-        <div id="fellowshipModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="fellowshipModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fellowshipModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Your Ideal Fellowship Partner Is:</h5>
+                        <h5 class="modal-title" id="fellowshipModalLabel">Your Ideal Fellowship Partner Is:</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -246,10 +246,17 @@
             question10 = $("#question10").val().trim(),
         ]
 
-        console.log(userInput);
+        //need to check that everything is filled before continuing
+        var isValid = false
+
+        userInput.forEach(element => {
+            if (element === "Select an Option") {
+                $("#submitButton").attr()
+            }
+        });             
         
     });
-
+//data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
 
 
 </script>
