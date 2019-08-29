@@ -228,58 +228,12 @@
 
 <script type="text/javascript">
 
-    $("#submitButton").on("click", function() {
-        event.preventDefault();
+    $("#submitButton").on("click", (event) => {
         
-        // Form validation
-		var valid = true;
-		if ($("#name").val() === "" || $("#photo").val() === "") {
-			valid = false;
-        } else if ($("#question1").val() === "Select an Option" || 
-                $("#question2").val() === "Select an Option" || 
-                $("#question3").val() === "Select an Option" || 
-                $("#question4").val() === "Select an Option" || 
-                $("#question5").val() === "Select an Option" || 
-                $("#question6").val() === "Select an Option" || 
-                $("#question7").val() === "Select an Option" || 
-                $("#question8").val() === "Select an Option" || 
-                $("#question9").val() === "Select an Option" || 
-                $("#question10").val() === "Select an Option") {
-            valid = false;
-		}
+        event.preventDefault(); //stops the page from refreshing
+
+        //storing the user's answers into a variable
         
-        if (valid) {
-            var newUser = {
-                name: $("#name").val().trim(),
-                photo: $("#photo").val().trim(),
-                    scores: [
-                    $("#question1").val(),
-                    $("#question2").val(),
-                    $("#question3").val(),
-                    $("#question4").val(),
-                    $("#question5").val(),
-                    $("#question6").val(),
-                    $("#question7").val(),
-                    $("#question8").val(),
-                    $("#question9").val(),
-                    $("#question10").val()            
-                        ]
-            };
-
-            var currentURL = window.location.origin;
-
-            $.post(currentURL + "/api/friends", newUser, function(results) {
-
-                $("#fellowshipName").text(results.name);
-				$("#fellowshipPhoto").attr("src", results.photo);
-				$("#fellowshipModal").modal("toggle");
-            });
-
-        } else {
-
-			alert("Survey is incomplete!");
-		}
-
     });
 
 
