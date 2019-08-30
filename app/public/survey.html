@@ -182,7 +182,7 @@
     </div>
 
     <div class="text-center">
-        <button id="submitButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Submit</button>
+        <button id="submitButton" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#fellowshipModal">Submit</button>
     </div>
 
 <!-- Closing Container Div -->
@@ -251,10 +251,36 @@
 
         userInput.forEach(element => {
             if (element === "Select an Option") {
-                $("#submitButton").attr()
+                enablePopover();
+                $("#submitButton").attr(
+                    "data-toggle",
+                    "popover").attr(
+                    "data-placement",
+                    "top").attr(
+                    "data-content",
+                    "Please complete the survey before submitting.");
+            } else {
+                disablePopover();
+                $("#submitButton").removeAttr(
+                    "data-toggle",
+                    "popover").removeAttr(
+                    "data-placement",
+                    "top").removeAttr(
+                    "data-content",
+                    "Please complete the survey before submitting.").attr(
+                    "data-toggle",
+                    "modal");
             }
         });             
         
+        function enablePopover() {
+            $('#submitButton').popover('enable')
+        }
+
+        function disablePopover() {
+            $('#submitButton').popover('disable')
+        }
+
     });
 //data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
 
