@@ -12,8 +12,8 @@ module.exports = function(app) {
     var user = req.body;
 
     // ParseInt the scores
-    for(var i = 0; i < user.scores.length; i++) {
-      user.scores[i] = parseInt(user.scores[i]);
+    for(var i = 0; i < user.answers.length; i++) {
+      user.answers[i] = parseInt(user.scores[i]);
     }
 
     var bestFriendIndex = 0;
@@ -27,8 +27,8 @@ module.exports = function(app) {
 
       var totalDifference = 0;
 
-      for(var j = 0; j < friends[i].scores.length; j++) {
-        var difference = Math.abs(user.scores[j] - friends[i].scores[j]);
+      for(var j = 0; j < friends[i].answers.length; j++) {
+        var difference = Math.abs(user.answers[j] - friends[i].answers[j]);
         totalDifference += difference;
       }
 
