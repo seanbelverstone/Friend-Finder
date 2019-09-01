@@ -237,22 +237,24 @@
             name: $("#userName"),
             photo: $("#userPhoto"),
             answers: [
-                question1 = $("#question1").val().trim(),
-                question2 = $("#question2").val().trim(),
-                question3 = $("#question3").val().trim(),
-                question4 = $("#question4").val().trim(),
-                question5 = $("#question5").val().trim(),
-                question6 = $("#question6").val().trim(),
-                question7 = $("#question7").val().trim(),
-                question8 = $("#question8").val().trim(),
-                question9 = $("#question9").val().trim(),
-                question10 = $("#question10").val().trim(),
+                question1 = $("#question1").val(),
+                question2 = $("#question2").val(),
+                question3 = $("#question3").val(),
+                question4 = $("#question4").val(),
+                question5 = $("#question5").val(),
+                question6 = $("#question6").val(),
+                question7 = $("#question7").val(),
+                question8 = $("#question8").val(),
+                question9 = $("#question9").val(),
+                question10 = $("#question10").val(),
             ]};
 
         //need to check that everything is filled before continuing
-        var isValid = false
+        var isValid = false;
 
-        userInput.forEach(element => {
+        userAnswers = userInput.answers;
+
+        userAnswers.forEach(element => {
             if (element === "Select an Option") {
                 enablePopover();
                 $("#submitButton").attr(
@@ -276,9 +278,15 @@
 
                     var currentUrl = window.location.origin;
 
-                    $.post(currentUrl + "api/friends"), (userInput, status) => {
-                        console.log(userInput);
-                    }   
+                    $.post(currentUrl + "/api/friends", userInput, results => {
+                        
+                        $("#fellowshipName").text(results.name);
+                        $("#fellowshipPhoto").attr("src", results.photo);
+                        $("#fellowshipModal").modal("toggle");
+                        console.log(results.name, results.photo, results.answers);
+
+                    });
+
             }
         });             
         
@@ -296,6 +304,5 @@
     });
     //other parts to continue
     // need to perform a post, in order to grab the details from friends.js and display it on the modal
-
 
 </script>
